@@ -8,18 +8,88 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+import UIKit
+import AVFoundation
 
+class ViewController: UIViewController {
+    
+    var cocked = false
+    @IBOutlet weak var fireArrow: UIImageView!
+    @IBOutlet weak var shakeRightArrow: UIImageView!
+    @IBOutlet weak var shakeLeftArrow: UIImageView!
+    
+    var clickClick = AVAudioPlayer()
+    var boom = AVAudioPlayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.setUpAudio()
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: Selector("swiped:"))
+        swipeUp.direction = .Up
+        self.view.addGestureRecognizer(swipeUp)
+        
+        self.hideImageViews(true, views: [self.fireArrow])
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func setUpAudio()
+    {
+        var clickLocation = NSString(string: NSBundle.mainBundle().pathForResource("clickclick", ofType: "mp3")!)
+        var clickURL = NSURL(fileURLWithPath: clickLocation)!
+        var clickError : NSError?
+        
+        var boomLocation = NSString(string: NSBundle.mainBundle().pathForResource("boom", ofType: "mp3")!)
+        var boomURL = NSURL(fileURLWithPath: boomLocation)!
+        var boomError : NSError?
+        
+        self.clickClick = AVAudioPlayer(contentsOfURL: clickURL, error: &clickError)
+        self.boom = AVAudioPlayer(contentsOfURL: boomURL, error: &boomError)
+    }
+    
+    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent)
+    {
+        if event.subtype == UIEventSubtype.MotionShake {
+            self.cocked = true
+            self.clickClick.play()
+            self.hideImageViews(false, views: [self.fireArrow])
+            self.hideImageViews(true, views: [self.shakeRightArrow, self.shakeLeftArrow])
+        }
+    }
+    
+    func swiped(gesture: UIGestureRecognizer)
+    {
+        if (self.cocked) {
+            if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+                switch swipeGesture.direction {
+                case UISwipeGestureRecognizerDirection.Up:
+                    self.boom.play()
+                    self.cocked = false
+                    self.hideImageViews(false, views: [self.shakeRightArrow, self.shakeLeftArrow])
+                    self.hideImageViews(true, views: [self.fireArrow])
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    func hideImageViews(visibility: Bool, views: Array<UIImageView>)
+    {
+        for view in views {
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                if (visibility) {
+                    view.alpha = 0
+                } else {
+                    view.alpha = 100
+                }
+            })
+        }
+    }
+    
 }
 
