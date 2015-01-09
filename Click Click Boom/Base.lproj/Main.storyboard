@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -44,9 +45,21 @@
                                     <constraint firstAttribute="width" constant="23" id="eeA-mi-9mI"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tc-a8-xd7">
+                                <rect key="frame" x="16" y="559" width="568" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="pKN-LF-Rqp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="0tc-a8-xd7" secondAttribute="bottom" constant="20" id="CxT-qP-KXI"/>
+                            <constraint firstItem="0tc-a8-xd7" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Qn4-y0-Se3"/>
+                            <constraint firstItem="0tc-a8-xd7" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="WO2-iK-rqD"/>
                             <constraint firstItem="8CC-dY-MiO" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="cTw-ks-BVf"/>
                             <constraint firstItem="8CC-dY-MiO" firstAttribute="centerX" secondItem="vd7-Iw-EkJ" secondAttribute="centerX" id="gwa-um-IEb"/>
                             <constraint firstItem="bhw-ID-XYe" firstAttribute="leading" secondItem="vd7-Iw-EkJ" secondAttribute="trailing" constant="18" id="hhm-SW-CFD"/>
@@ -62,6 +75,7 @@
                         <outlet property="fireArrow" destination="8CC-dY-MiO" id="lKN-VY-X4I"/>
                         <outlet property="shakeLeftArrow" destination="vox-CM-T1i" id="yR9-Jg-jIx"/>
                         <outlet property="shakeRightArrow" destination="bhw-ID-XYe" id="Y4d-lC-OsC"/>
+                        <outlet property="shotsFiredLabel" destination="0tc-a8-xd7" id="quB-0D-szZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var fireArrow: UIImageView!
     @IBOutlet weak var shakeRightArrow: UIImageView!
     @IBOutlet weak var shakeLeftArrow: UIImageView!
+    @IBOutlet weak var shotsFiredLabel: UILabel!
+    
+    var shotsFired = 0
     
     var clickClick = AVAudioPlayer()
     var boom = AVAudioPlayer()
@@ -70,6 +73,7 @@ class ViewController: UIViewController {
                     self.boom.play()
                     self.cocked = false
                     self.hideImageViews(false, views: [self.shakeRightArrow, self.shakeLeftArrow])
+                    self.updateShotsFired()
                 default:
                     break
                 }
@@ -77,7 +81,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func hideImageViews(visibility: Bool, views: Array<UIImageView>)
+    func hideImageViews(visibility: Bool, views: Array<UIView>)
     {
         for view in views {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
@@ -88,6 +92,12 @@ class ViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func updateShotsFired()
+    {
+        self.shotsFired++
+        self.shotsFiredLabel.text = "shots fired: \(self.shotsFired)"
     }
     
 }
