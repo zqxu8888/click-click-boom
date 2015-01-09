@@ -7,8 +7,6 @@
 //
 
 import UIKit
-
-import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
@@ -57,7 +55,8 @@ class ViewController: UIViewController {
             self.cocked = true
             self.clickClick.play()
             self.hideImageViews(false, views: [self.fireArrow])
-            self.hideImageViews(true, views: [self.shakeRightArrow, self.shakeLeftArrow])
+            self.shakeRightArrow.alpha = 0
+            self.shakeLeftArrow.alpha = 0
         }
     }
     
@@ -67,10 +66,10 @@ class ViewController: UIViewController {
             if let swipeGesture = gesture as? UISwipeGestureRecognizer {
                 switch swipeGesture.direction {
                 case UISwipeGestureRecognizerDirection.Up:
+                    self.fireArrow.alpha = 0
                     self.boom.play()
                     self.cocked = false
                     self.hideImageViews(false, views: [self.shakeRightArrow, self.shakeLeftArrow])
-                    self.hideImageViews(true, views: [self.fireArrow])
                 default:
                     break
                 }
@@ -81,11 +80,13 @@ class ViewController: UIViewController {
     func hideImageViews(visibility: Bool, views: Array<UIImageView>)
     {
         for view in views {
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
                 if (visibility) {
                     view.alpha = 0
+                    println("Hiding")
                 } else {
                     view.alpha = 100
+                    println("Showing")
                 }
             })
         }
