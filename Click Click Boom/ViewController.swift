@@ -83,10 +83,8 @@ class ViewController: UIViewController {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 if (visibility) {
                     view.alpha = 0
-                    println("Hiding")
                 } else {
                     view.alpha = 100
-                    println("Showing")
                 }
             })
         }
